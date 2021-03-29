@@ -19,7 +19,7 @@ app.listen(PORT, () => console.log(`Server iniciado en el puerto: ${PORT}`))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: [process.env.FRONT_URL],
+    origin: [process.env.FRONT_ADDRESS],
     credentials: true,
 }));
 
