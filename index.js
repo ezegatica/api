@@ -19,7 +19,7 @@ app.listen(PORT, () => console.log(`Server iniciado en el puerto: ${PORT}`))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: ["https://admin.eze.wtf"],
+    origin: [process.env.FRONT_URL],
     credentials: true,
 }));
 
