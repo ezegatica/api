@@ -19,7 +19,7 @@ app.listen(PORT, () => console.log(`Server iniciado en el puerto: ${PORT}`))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://admin.eze.wtf"],
     credentials: true,
 }));
 
@@ -55,6 +55,7 @@ app.use("/:tag", async (req, res) => {
             res.redirect(existingTag.destino)
         } else {
             res.sendFile(path.join(__dirname+'/404.html'));
+            // res.redirect('https://eze.wtf')
 
         }
     } catch (err) {
