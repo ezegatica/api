@@ -44,7 +44,9 @@ app.use("/url", require("./routers/link.router"))
 app.use("/admin", async (req, res) => {
     res.redirect('https://admin.eze.wtf')
 })
-
+app.get('/ping', (req, res) => {
+    res.json('Pong!')
+});
 app.use("/:tag", async (req, res) => {
     try {
         const tag = req.params.tag
@@ -68,8 +70,3 @@ app.use("/:tag", async (req, res) => {
 app.use("/", async (req, res) => {
     res.redirect(process.env.FRONT_ADDRESS)
 })
-
-
-app.get('/ping', (req, res) => {
-    res.json('Pong!')
-});
