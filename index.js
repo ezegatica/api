@@ -66,7 +66,7 @@ app.use("/:tag", async (req, res) => {
 })
 
 app.use("/", async (req, res) => {
-    res.redirect('https://admin.eze.wtf')
+    res.redirect(process.env.FRONT_ADDRESS)
 })
 
 
