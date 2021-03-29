@@ -40,6 +40,8 @@ router.post("/register", async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
 
+        }).cookie("username", username, {
+            httpOnly: true
         }).send();
 
 
@@ -75,6 +77,8 @@ router.post("/login", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true
+        }).cookie("username", username, {
+            httpOnly: true
         }).send();
 
     } catch (err) {
@@ -85,6 +89,9 @@ router.post("/login", async (req, res) => {
 
 router.get("/logout", (req, res) => {
     res.cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(69)
+    }).cookie("username", "", {
         httpOnly: true,
         expires: new Date(69)
     }).send()
