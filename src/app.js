@@ -2,14 +2,12 @@
 const express = require("express");
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
-const path = require('path');
 const config = require('./config')
-
 //Import Rutas
-const rutasTools = require('./routers/Herramientas.routes')
-const rutasRoot = require('./routers/Root.routes')
-const rutasUsuario = require("./routers/user.router")
-const rutasURL = require("./routers/link.router")
+const rutasTools = require('./Routers/Herramientas.routes')
+const rutasRoot = require('./Routers/Root.routes')
+const rutasUsuario = require("./Routers/User.routes")
+const rutasURL = require("./Routers/Link.routes")
 // start
 const app = express();
 
@@ -20,7 +18,6 @@ app.use(cors({
     origin: [config.FRONT_ADDRESS],
     credentials: true,
 }));
-
 
 
 // routes

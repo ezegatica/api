@@ -1,10 +1,9 @@
-const router = require("express").Router();
-const User = require("../models/User.model")
+const Auth = [];
+const User = require("../Models/User.model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-
-//register
-router.post("/register", async (req, res) => {
+const config = require("../config")
+Auth.register = async (req, res) => {
     try {
         const { username, password } = req.body;
 
@@ -13,7 +12,7 @@ router.post("/register", async (req, res) => {
             return res.status(400).json({ errorType: "no-username-or-password" })
         if (password.length < 6)
             return res.status(400).json({ errorType: "short-password" })
-        
+
         const existsUsername = await User.findOne({ username: username })
         if (existsUsername)
             return res.status(400).json({ errorType: "username-used" })
@@ -33,7 +32,7 @@ router.post("/register", async (req, res) => {
 
         const token = jwt.sign({
             user: savedUser._id
-        }, process.env.JWT_SECRET);
+        }, config.SECRET);
 
         //enviar el token como cookie
 
@@ -49,9 +48,9 @@ router.post("/register", async (req, res) => {
         console.error(err)
         res.status(500).send();
     }
-})
+}
 
-router.post("/login", async (req, res) => {
+Auth.login = async (req, res) => {
     try {
         const { username, password } = req.body;
 
@@ -71,7 +70,7 @@ router.post("/login", async (req, res) => {
         //generando token
         const token = jwt.sign({
             user: existingUser._id
-        }, process.env.JWT_SECRET);
+        }, config.SECRET);
 
         //enviar el token como cookie
 
@@ -85,9 +84,9 @@ router.post("/login", async (req, res) => {
         console.error(err)
         res.status(500).send();
     }
-})
+}
 
-router.get("/logout", (req, res) => {
+Auth.logout = (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
         expires: new Date(69)
@@ -95,15 +94,15 @@ router.get("/logout", (req, res) => {
         httpOnly: true,
         expires: new Date(69)
     }).send()
-})
+}
 
-router.get("/check", async (req, res) => {
+Auth.check = async (req, res) => {
     try {
         const token = req.cookies.token
         if (!token)
             return res.json(false);
 
-        jwt.verify(token, process.env.JWT_SECRET)
+        jwt.verify(token, config.SECRET)
         
         res.send(true)
 
@@ -111,6 +110,6 @@ router.get("/check", async (req, res) => {
         console.error(err)
         res.json(false);
     }
-})
+}
 
-module.exports = router
+module.exports = Auth;

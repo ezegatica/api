@@ -2,12 +2,11 @@
 const { Router } = require('express');
 const rutas = Router();
 const path = require('path');
-const Link = require("../models/Link.model")
+const Link = require("../Models/Link.model")
 
 //Controller
 const Herramientas = require('../Controllers/Herramientas.controller');
 const Actions = require('../Controllers/Actions.controller');
-//Middlewares
 
 //Rutas:
 rutas.get('/watch', Herramientas.youtube);

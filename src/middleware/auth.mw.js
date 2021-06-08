@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const config = require("../config")
 function auth(req, res, next) {
     try {
 
@@ -6,7 +7,7 @@ function auth(req, res, next) {
         if (!token)
             return res.status(401).json({errorType: "unauthorized"});
         
-        const verified = jwt.verify(token, process.env.JWT_SECRET)
+        const verified = jwt.verify(token, config.SECRET)
         req.user = verified.user
 
         next()
