@@ -10,6 +10,11 @@ dotenv.config();
 
 const Link = require("./models/Link.model")
 
+//Rutas
+const rutasTools = require('./routers/Herramientas.routes')
+const rutasRoot = require('./routers/Root.routes')
+
+
 // start
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -44,9 +49,21 @@ app.use("/url", require("./routers/link.router"))
 app.use("/admin", async (req, res) => {
     res.redirect('https://admin.eze.wtf')
 })
+app.use("/panel", async (req, res) => {
+    res.redirect('https://admin.eze.wtf')
+})
 app.get('/ping', (req, res) => {
     res.json('Pong!')
 });
+app.use('/herramientas', rutasTools);
+app.use("/", rutasRoot)
+
+
+app.get("/fonts/FontAwesome.woff2", (req, res) => {res.sendFile(path.join(__dirname+'/assets/fonts/FontAwesome.woff2'));})
+app.get("/fonts/clock.woff", (req, res) => {res.sendFile(path.join(__dirname+'/assets/fonts/clock.woff'));})
+app.get("/image/favicon.ico", (req, res) => {res.sendFile(path.join(__dirname+'/assets/images/favicon.ico'));})
+app.get("/robots.txt", (req, res) => {res.sendFile(path.join(__dirname+'/assets/common/robots.txt'));})
+
 app.use("/:tag", async (req, res) => {
     try {
         const tag = req.params.tag
@@ -66,7 +83,7 @@ app.use("/:tag", async (req, res) => {
     }
 
 })
-
 app.use("/", async (req, res) => {
-    res.redirect(process.env.FRONT_ADDRESS)
+    // res.redirect(process.env.FRONT_ADDRESS)
+    res.sendFile(path.join(__dirname+'/index.html'));
 })

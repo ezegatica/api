@@ -1,0 +1,10 @@
+//Dependencias
+const { Router } = require('express');
+const rutas = Router();
+//Controller
+const Herramientas = require('../Controllers/Herramientas.controller');
+//Middlewares
+rutas.get('/watch', Herramientas.youtube);
+
+
+module.exports = rutas;

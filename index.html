@@ -1,12 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width">
+    <!-- <link rel="stylesheet" href="css/font-awesome-essential.css"> -->
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <style>
+        @font-face {
+            font-family: FontAwesome;
+            src: url(../fonts/FontAwesome.woff2) format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .fa-github:before {
+            content: "\f09b"
+        }
+
+        .fa-twitter:before {
+            content: "\f099"
+        }
+
+        .fa-linkedin-square:before {
+            content: "\f08c"
+        }
+
+        .fa-instagram:before {
+            content: "\f16d"
+        }
+    </style>
+    <style>
+        @font-face {
+            font-family: clock;
+            src: url(../fonts/clock.woff);
+            font-display: swap
+        }
+
+        * {
+            overflow-y: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: rgba(0, 0, 0, .01) 0 0 1px
+        }
+
+        ::selection {
+            color: #fff
+        }
+
+        :root {
+            --padd: 10px
+        }
+
+        body {
+            font-family: clock;
+            background: #000;
+            color: #0f0;
+            margin: 0;
+            padding: 0
+        }
+
+        .landing {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            text-align: center
+        }
+
+        .landing #text {
+            max-width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+            letter-spacing: .15em
+        }
+
+        #text::after {
+            content: "|";
+            animation: .5s pimpum ease infinite
+        }
+
+        @keyframes pimpum {
+            0% {
+                opacity: 0
+            }
+
+            100% {
+                opacity: 1
+            }
+        }
+
+        a {
+            color: #0f0;
+            font-family: monospace
+        }
+
+        a:hover {
+            color: #fff !important
+        }
+
+        .rrss {
+            animation: 2s pimpum;
+            font-size: 24px;
+            padding-left: var(--padd);
+            padding-right: var(--padd)
+        }
+
+        #navbar {
+            animation: 2s pimpum
+        }
+
+        .fa {
+            font-size: 24px !important
+        }
+    </style>
+    <link rel="preload" href="./fonts/FontAwesome.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/clock.woff" as="font" type="font/woff2" crossorigin />
+    <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#00ff00" />
+    <title>
+        </Eze>
+    </title>
+    <meta name="description" content="Sitio web de Ezequiel Gatica">
 </head>
-<body>
-    archivo html
+
+<body onload="tW();">
+    <div class="landing">
+        <h1 id="text"><noscript>EZEQUIEL_GATICA</noscript></h1>
+        <br />
+        <noscript>
+            <div id="redes">
+                <a target="_blank" rel="noreferrer" href="https://twitter.com/ezegaticaa" title="twitter"><i
+                        class="fa fa-twitter rrss"></i></a>
+                <a target="_blank" rel="noreferrer" href="https://instagram.com/ezegaticaa" title="instagram"><i
+                        class="fa fa-instagram rrss"></i></a>
+                <a target="_blank" rel="noreferrer" href="https://github.com/ezegatica" title="github"><i
+                        class="fa fa-github rrss"></i></a>
+                <a target="_blank" rel="noreferrer" href="https://linkedin.com/in/ezeg" title="linkedin"><i
+                        class="fa fa-linkedin-square rrss"></i></a>
+            </div>
+        </noscript>
+        <div id="redes" style="display: none;">
+            <a target="_blank" rel="noreferrer" href="https://twitter.com/ezegaticaa" title="twitter"><i
+                    class="fa fa-twitter rrss"></i></a>
+            <a target="_blank" rel="noreferrer" href="https://instagram.com/ezegaticaa" title="instagram"><i
+                    class="fa fa-instagram rrss"></i></a>
+            <a target="_blank" rel="noreferrer" href="https://github.com/ezegatica" title="github"><i
+                    class="fa fa-github rrss"></i></a>
+            <a target="_blank" rel="noreferrer" href="https://linkedin.com/in/ezeg" title="linkedin"><i
+                    class="fa fa-linkedin-square rrss"></i></a>
+        </div>
+        <div id="espacio">
+            <a target="_blank" rel="noreferrer" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                style="color: transparent">:P</a>
+        </div>
+    </div>
+    <!-- <script src="./js/index.js"></script> -->
+    <script
+        lang="javascript">var na = 0, txt = "EZEQUIEL_GATICA", speed = 150, redes = document.getElementById("redes"), espacio = document.getElementById("espacio"), navbar = document.getElementById("navbar"); function tW() { if (na < txt.length) { var txtPrint = txt.toUpperCase(); document.getElementById("text").innerHTML += txtPrint.charAt(na), na++, setTimeout(tW, speed) } setTimeout(() => { showRedes() }, 2500) } function showRedes() { redes.style.display = "block", espacio.style.display = "none" }</script>
 </body>
+
 </html>
