@@ -40,7 +40,7 @@ rutas.get("/:tag", async (req, res) => {
             await Link.updateOne({ _id: data._id }, { $inc: { conteo: 1 } })
             res.redirect(existingTag.destino)
         } else {
-            res.sendFile('404.html', { root: path.join(__dirname, '../Pages') });
+            res.sendFile('404page-test.html', { root: path.join(__dirname, '../Pages'), name:'hola' });
         }
     } catch (err) {
         console.error(err)
