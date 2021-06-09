@@ -51,15 +51,20 @@ Herramientas.twitter = async (req, res) => {
             if (!error) {
                 var bitrate = 0;
                 var hq_video_url;
-                for (var j = 0; j < tweet.extended_entities.media[0].video_info.variants.length; j++) {
-                    if (tweet.extended_entities.media[0].video_info.variants[j].bitrate) {
-                        if (tweet.extended_entities.media[0].video_info.variants[j].bitrate > bitrate) {
-                            bitrate = tweet.extended_entities.media[0].video_info.variants[j].bitrate;
-                            hq_video_url = tweet.extended_entities.media[0].video_info.variants[j].url;
+                try {
+                    for (var j = 0; j < tweet.extended_entities.media[0].video_info.variants.length; j++) {
+                        if (tweet.extended_entities.media[0].video_info.variants[j].bitrate) {
+                            if (tweet.extended_entities.media[0].video_info.variants[j].bitrate > bitrate) {
+                                bitrate = tweet.extended_entities.media[0].video_info.variants[j].bitrate;
+                                hq_video_url = tweet.extended_entities.media[0].video_info.variants[j].url;
+                            }
                         }
                     }
+                    res.redirect(hq_video_url);
+                } catch (error) {
+                    res.status(500).json({ message: "El tweet no es un video" })
                 }
-                res.redirect(hq_video_url );
+
             } else {
                 res.status(500).json({ codigo: error[0].code, message: "No se encontraron videos con esa id!" })
             }
