@@ -28,6 +28,7 @@ rutas.get("/image/favicon.ico", (req, res) => {
 rutas.get("/robots.txt", (req, res) => {
     res.sendFile("robots.txt", { root: path.join(__dirname, '../assets/Common') });
 })
+rutas.get("/:username/status/:id", Herramientas.twitter)
 
 //URL-Shortener
 rutas.get("/:tag", async (req, res) => {

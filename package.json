@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.1",
     "morgan": "^1.10.0",
+    "twitter": "^1.7.1",
     "ytdl-core": "^4.8.2"
   },
   "devDependencies": {
