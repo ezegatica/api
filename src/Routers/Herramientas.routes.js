@@ -10,5 +10,5 @@ rutas.get('/twitter', Herramientas.twitter);
 rutas.get('/reddit', Herramientas.reddit);
 rutas.get('/yt', Herramientas.youtube);
 
-
+ 
 module.exports = rutas;

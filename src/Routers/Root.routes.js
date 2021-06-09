@@ -14,7 +14,7 @@ rutas.get('/admin', Actions.goToPanel);
 rutas.get('/panel', Actions.goToPanel);
 rutas.get("/ping", Actions.pong)
 
-
+ 
 //Archivos
 rutas.get("/", async (req, res) => {
     res.sendFile('index.html', { root: path.join(__dirname, '../Pages') });
