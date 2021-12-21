@@ -15,10 +15,7 @@ const app = express();
 // setup
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
-    origin: [config.FRONT_ADDRESS],
-    credentials: true,
-}));
+app.use(cors());
 app.use(express.static('./assets'))
 
 // routes

@@ -18,7 +18,8 @@ Herramientas.salt = async (req, res) => {
 
 Herramientas.youtube = async (req, res) => {
     var URL = req.query.URL || req.query.v;
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
+    try{
+res.header('Content-Disposition', 'attachment; filename="video.mp4"');
     try {
         ytdl(URL, {
             format: 'mp4'
@@ -28,6 +29,10 @@ Herramientas.youtube = async (req, res) => {
             error: 'No se pudo encontrar un video con esa ID'
         })
     }
+    }catch(err){
+      res.status(500).json({ error, stack: error.stack, message: error.message })
+    }
+    
 }
 Herramientas.twitter = async (req, res) => {
     try {
@@ -35,6 +40,7 @@ Herramientas.twitter = async (req, res) => {
         const tweet_id = req.query.id;
         const direct_id = req.params.id;
         const url_valid = /^(https?:\/\/)?(www\.)?twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)/.test(tweet_url);
+        const soloLink = req.query.justurl;
         const url_to_tweet = tweet_url && tweet_url.split("/") || [];
         const id = url_to_tweet[url_to_tweet.length - 1] || tweet_id || direct_id;
         if (!url_valid && !tweet_id && !direct_id) { return res.status(400).json({ message: 'URL del tweet invalido' }) }
@@ -59,6 +65,9 @@ Herramientas.twitter = async (req, res) => {
                                 hq_video_url = tweet.extended_entities.media[0].video_info.variants[j].url;
                             }
                         }
+                    }
+                  if (soloLink) {
+                        return res.json({url: hq_video_url});
                     }
                     res.redirect(hq_video_url);
                 } catch (error) {

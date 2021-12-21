@@ -35,12 +35,10 @@ Auth.register = async (req, res) => {
         }, config.SECRET);
 
         //enviar el token como cookie
-
+        return res.json({token});
         res.cookie("token", token, {
             httpOnly: true,
 
-        }).cookie("username", username, {
-            httpOnly: true
         }).send();
 
 
@@ -73,12 +71,9 @@ Auth.login = async (req, res) => {
         }, config.SECRET);
 
         //enviar el token como cookie
-
         res.cookie("token", token, {
             httpOnly: true
-        }).cookie("username", username, {
-            httpOnly: true
-        }).send();
+        }).json({token}).send();
 
     } catch (err) {
         console.error(err)
@@ -98,7 +93,7 @@ Auth.logout = (req, res) => {
 
 Auth.check = async (req, res) => {
     try {
-        const token = req.cookies.token
+        const token = req.body.token;
         if (!token)
             return res.json(false);
 

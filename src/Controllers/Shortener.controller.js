@@ -2,6 +2,7 @@ const Shortener = [];
 const Link = require("../Models/Link.model");
 
 Shortener.newUrl = async (req, res) => {
+  console.log(req.body)
     try {
         const { destino, tag } = req.body;
         if (!destino)
@@ -26,7 +27,7 @@ Shortener.newUrl = async (req, res) => {
         res.json(savedLink)
 
     } catch (err) {
-        console.error(err)
+        //console.error(err)
         res.status(500).send();
     }
 }
