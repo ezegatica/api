@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 const config = require('./config')
+const morgan = require("morgan");
 //Import Rutas
 const rutasTools = require('./Routers/Herramientas.routes');
 const rutasRoot = require('./Routers/Root.routes');
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors());
 app.use(express.static('./assets'))
+app.use(morgan('dev'));
 
 // routes
 app.use("/", rutasRoot)
