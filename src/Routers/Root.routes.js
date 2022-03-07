@@ -19,6 +19,9 @@ rutas.get("/ping", Actions.pong)
 rutas.get("/", async (req, res) => {
     res.sendFile('index.html', { root: path.join(__dirname, '../Pages') });
 })
+rutas.get("/eth", async (req, res) => {
+    res.send("0xcc5142fe409BE2232428595fD48D6c4a514c4cF0");
+})
 rutas.get("/fonts/:font", (req, res) => {
     res.sendFile(req.params.font, { root: path.join(__dirname, '../assets/Fonts') });
 })

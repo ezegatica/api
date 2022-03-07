@@ -1,7 +1,7 @@
 const Actions = [];
 
 Actions.goToPanel = (req, res) => {
-    res.redirect('https://admin.eze.wtf')
+    res.redirect('https://admin.ezegatica.com')
 }
 
 Actions.pong = (req, res) => {
