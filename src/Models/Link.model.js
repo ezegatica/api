@@ -1,4 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
+const mongooseConn = require("../database");
 
 const linkSchema = new mongoose.Schema({
     destino:{
@@ -21,6 +23,6 @@ const linkSchema = new mongoose.Schema({
     // }
 })
 
-const Link = mongoose.model("link", linkSchema)
+const Link = mongooseConn.model("link", linkSchema)
 
 module.exports = Link;

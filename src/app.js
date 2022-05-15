@@ -9,6 +9,7 @@ const rutasTools = require('./Routers/Herramientas.routes');
 const rutasRoot = require('./Routers/Root.routes');
 const rutasUsuario = require("./Routers/User.routes");
 const rutasURL = require("./Routers/Link.routes");
+const rutasVentas = require("./Routers/Ventas.routes");
 const handle404 = require("./Middleware/redirect.mw")
 // start
 const app = express();
@@ -25,6 +26,7 @@ app.use("/", rutasRoot)
 app.use("/auth", rutasUsuario)
 app.use("/url", rutasURL)
 app.use('/herramientas', rutasTools);
+app.use('/ventas', rutasVentas);
 app.use(handle404)
 
 

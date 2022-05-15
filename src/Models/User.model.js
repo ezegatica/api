@@ -1,4 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
+const mongooseConn = require("../database");
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -11,6 +13,6 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const User = mongoose.model("user", userSchema)
+const User = mongooseConn.model("user", userSchema)
 
 module.exports = User;
