@@ -97,7 +97,7 @@ Ventas.editarByID = async (req, res) => {
                 message: "Item not found"
             })
         }
-        const imagen = req.body?.imagen?.split("\n").filter(e => e !== "") || item.imagen;
+        const imagen = req.body.imagen.split("\n").filter(e => e !== "") || item.imagen;
         const { nombre, descripcion, short_descripcion, precio, vendido } = req.body;
         const newItem = await Item.findByIdAndUpdate(id, {
             nombre: nombre || item.nombre,
