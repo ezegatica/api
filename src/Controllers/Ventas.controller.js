@@ -1,5 +1,9 @@
 const Ventas = [];
 const Item = require("../Models/Item.model");
+const Redis = require("ioredis");
+
+const redis = new Redis(process.env.REDIS_URL);
+
 
 Ventas.newItem = async (req, res) => {
     const { nombre, descripcion, short_descripcion, precio, imagen } = req.body;
@@ -11,6 +15,12 @@ Ventas.newItem = async (req, res) => {
         imagen: imagen.split("\n").filter(e => e !== "")
     });
     const newItem = await item.save();
+    redis.del(`${process.env.NODE_ENV}:list:all`);
+    const keys = await redis.keys(`${process.env.NODE_ENV}:query:${item.nombre[0].toLowerCase()}*`)
+    console.log(keys);
+    keys.forEach(function (key) {
+        redis.del(key);
+    });
     res.status(200).json({
         message: "ok",
         item: newItem
@@ -31,6 +41,13 @@ Ventas.deleteByID = async (req, res) => {
                 message: "Item not found"
             })
         }
+        redis.del(`${process.env.NODE_ENV}:list:all`);
+        redis.del(`${process.env.NODE_ENV}:item:${id}`);
+        const keys = await redis.keys(`${process.env.NODE_ENV}:query:${item.nombre[0].toLowerCase()}*`)
+        console.log(keys);
+        keys.forEach(function (key) {
+            redis.del(key);
+        });
         await item.remove();
         return res.json(item);
     }
@@ -51,9 +68,16 @@ Ventas.marcarComoVendido = async (req, res) => {
             })
         }
         item.vendido = true;
-        if (!item.short_descripcion){
+        if (!item.short_descripcion) {
             item.short_descripcion = " ";
         }
+        redis.del(`${process.env.NODE_ENV}:list:all`);
+        redis.del(`${process.env.NODE_ENV}:item:${id}`);
+        const keys = await redis.keys(`${process.env.NODE_ENV}:query:${item.nombre[0].toLowerCase()}*`)
+        console.log(keys);
+        keys.forEach(function (key) {
+            redis.del(key);
+        });
         await item.save();
         return res.json(item);
     }
@@ -74,7 +98,14 @@ Ventas.marcarComoNoVendido = async (req, res) => {
             })
         }
         item.vendido = false;
-        if (!item.short_descripcion){
+        redis.del(`${process.env.NODE_ENV}:list:all`);
+        redis.del(`${process.env.NODE_ENV}:item:${id}`);
+        const keys = await redis.keys(`${process.env.NODE_ENV}:query:${item.nombre[0].toLowerCase()}*`)
+        console.log(keys);
+        keys.forEach(function (key) {
+            redis.del(key);
+        });
+        if (!item.short_descripcion) {
             item.short_descripcion = " ";
         }
         await item.save();
@@ -106,7 +137,14 @@ Ventas.editarByID = async (req, res) => {
             precio: parseInt(precio, 10) || item.precio,
             vendido: vendido !== undefined ? vendido : item.vendido,
             imagen
-        }, {new: true});
+        }, { new: true });
+        redis.del(`${process.env.NODE_ENV}:list:all`);
+        redis.del(`${process.env.NODE_ENV}:item:${id}`);
+        const keys = await redis.keys(`${process.env.NODE_ENV}:query:${item.nombre[0].toLowerCase()}*`)
+        console.log(keys);
+        keys.forEach(function (key) {
+            redis.del(key);
+        });
         return res.json(newItem);
     }
     catch (error) {
