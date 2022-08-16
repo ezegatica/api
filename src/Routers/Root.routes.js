@@ -17,38 +17,12 @@ rutas.get("/ping", Actions.pong)
  
 //Archivos
 rutas.get("/", async (req, res) => {
-    res.sendFile('index.html', { root: path.join(__dirname, '../Pages') });
+    res.json({
+        message: "Hola! Bienvenido a mi api, no tengo nada que decir. Si descubriste esto por tu cuenta, porfi no rompas nada c:",
+        website: "https://ezegatica.com"
+    })
 })
-rutas.get("/eth", async (req, res) => {
-    res.send("0xcc5142fe409BE2232428595fD48D6c4a514c4cF0");
-})
-rutas.get("/fonts/:font", (req, res) => {
-    res.sendFile(req.params.font, { root: path.join(__dirname, '../assets/Fonts') });
-})
-rutas.get("/image/favicon.ico", (req, res) => {
-    res.sendFile("favicon.ico", { root: path.join(__dirname, '../assets/Images') });
-})
-rutas.get("/robots.txt", (req, res) => {
-    res.sendFile("robots.txt", { root: path.join(__dirname, '../assets/Common') });
-})
+
 rutas.get("/:username/status/:id", Herramientas.twitter)
 
-//URL-Shortener
-rutas.get("/:tag", async (req, res) => {
-    try {
-        const tag = req.params.tag
-        let existingTag = await Link.findOne({ tag: tag })
-        const data = existingTag;
-        if (existingTag) {
-            await Link.updateOne({ _id: data._id }, { $inc: { conteo: 1 } })
-            res.redirect(existingTag.destino)
-        } else {
-            res.sendFile('404page-test.html', { root: path.join(__dirname, '../Pages'), name:'hola' });
-        }
-    } catch (err) {
-        console.error(err)
-        res.status(500).send();
-    }
-
-})
 module.exports = rutas;
