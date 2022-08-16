@@ -19,7 +19,7 @@ rutas.get("/ping", Actions.pong)
 //Archivos
 rutas.get("/", async (req, res) => {
     res.json({
-        message: "Hola! Bienvenido a mi api, no tengo nada que decir. Si descubriste esto por tu cuenta, porfi no rompas nada c:",
+        message: "Hola viajero! Bienvenido a mi api, no tengo nada que decir. Si descubriste esto por tu cuenta, porfi no rompas nada c:",
         website: "https://ezegatica.com"
     })
 })
