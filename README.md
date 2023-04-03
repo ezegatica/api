@@ -1,3 +1,2 @@
-Cosas a hacer:
-1) Acomodar los archivos
-2) Agregar mas servicios de descarga de videos, como Reddit o Twitter.
+# DEPRECADO
+Reemplazado por [ezegatica/cloudflare-workers](https://github.com/ezegatica/cloudflare-workers)
